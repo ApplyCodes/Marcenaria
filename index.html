@@ -1058,7 +1058,22 @@
       }
 
       .contact-meta {
-        gap: 32px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 20px;
+        width: 100%;
+      }
+
+      .contact-meta div {
+        text-align:left;
+      }
+
+      .contact-meta div:last-child {
+        grid-column: 2;
+      }
+
+      .contact-meta div:last-child {
+        grid-column: 2;
       }
     }
 
