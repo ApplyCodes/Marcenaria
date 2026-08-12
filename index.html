@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcenaria Vilar Móveis Planejados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --preto: #0b0a08;
+      --painel: #141210;
+      --painel2: #1c1815;
+      --ouro: #c9a35f;
+      --ouro-claro: #e8d3a1;
+      --marfim: #f4eee0;
+      --linha: rgba(201, 163, 95, 0.22);
+      --ease: cubic-bezier(.16, .84, .44, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--preto);
+      color: var(--marfim);
+      font-family: 'Jost', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    ::selection {
+      background: var(--ouro);
+      color: var(--preto);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* faint global wood-grain / vignette texture, no photos */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% -10%, rgba(201, 163, 95, 0.08), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 100% 100%, rgba(201, 163, 95, 0.05), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .script {
+      font-family: 'Pinyon Script', cursive;
+      font-weight: 400;
+    }
+
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--ouro);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: var(--ouro);
+      display: inline-block;
+    }
+
+    .eyebrow.center {
+      justify-content: center;
+    }
+
+    .eyebrow.center::before {
+      display: none;
+    }
+
+    /* ---------- reveal ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 1s var(--ease), transform 1s var(--ease);
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-d2 {
+      transition-delay: .14s;
+    }
+
+    .reveal-d3 {
+      transition-delay: .28s;
+    }
+
+    .reveal-d4 {
+      transition-delay: .42s;
+    }
+
+    /* ---------- nav ---------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 6vw;
+      transition: background .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+
+    header.scrolled {
+      background: rgba(11, 10, 8, 0.86);
+      backdrop-filter: blur(10px);
+      padding: 14px 6vw;
+      border-color: var(--linha);
+    }
+
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-ring {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--ouro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .logo-ring img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+
+    .logo-text b {
+      display: block;
+      font-weight: 600;
+    }
+
+    .logo-text span {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ouro);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+    }
+
+    nav a {
+      font-size: 12.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ouro);
+      transition: width .35s var(--ease);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--ouro);
+      color: var(--ouro-claro) !important;
+      padding: 10px 22px;
+      font-size: 11.5px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      transition: background .3s var(--ease), color .3s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-cta span {
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--ouro);
+      transform: translateX(-101%);
+      transition: transform .4s var(--ease);
+      z-index: 1;
+    }
+
+    .nav-cta:hover {
+      color: var(--preto) !important;
+    }
+
+    .nav-cta:hover::before {
+      transform: translateX(0);
+    }
+
+    .burger {
+      display: none;
+    }
+
+    /* ---------- hero ---------- */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 6vw 80px;
+      position: relative;
+    }
+
+    .hero-monogram {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeScale 1.2s var(--ease) forwards;
+      animation-delay: .15s;
+    }
+
+    @keyframes fadeScale {
+      from {
+        opacity: 0;
+        transform: scale(.85);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .hero-monogram svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ring-draw {
+      fill: none;
+      stroke: var(--ouro);
+      stroke-width: 1;
+      stroke-dasharray: 690;
+      stroke-dashoffset: 690;
+      animation: drawRing 2.4s var(--ease) forwards;
+      animation-delay: .4s;
+    }
+
+    @keyframes drawRing {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .ring-dot {
+      fill: none;
+      stroke: var(--ouro);
+      stroke-width: 1;
+      stroke-dasharray: 2 10;
+      opacity: 0;
+      animation: spinSlow 60s linear infinite, fadeIn2 1s var(--ease) forwards;
+      animation-delay: 0s, 2.6s;
+      transform-origin: 50% 50%;
+    }
+
+    @keyframes spinSlow {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes fadeIn2 {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .hero-logo-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      opacity: 0;
+      animation: fadeIn2 1s var(--ease) forwards;
+      animation-delay: 1.1s;
+      box-shadow: 0 0 40px rgba(201, 163, 95, 0.15);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(40px, 7vw, 84px);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      animation: riseIn 1s var(--ease) forwards;
+      animation-delay: 1.3s;
+    }
+
+    .hero h1 .script {
+      display: block;
+      font-size: clamp(52px, 9vw, 110px);
+      color: var(--ouro-claro);
+      margin-top: 2px;
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero p {
+      max-width: 46ch;
+      margin: 26px auto 40px;
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(244, 238, 224, 0.72);
+      opacity: 0;
+      animation: riseIn 1s var(--ease) forwards;
+      animation-delay: 1.55s;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: riseIn 1s var(--ease) forwards;
+      animation-delay: 1.75s;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ouro);
+      color: var(--preto);
+      padding: 16px 34px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+      box-shadow: 0 0 0 0 rgba(201, 163, 95, 0.4);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(201, 163, 95, 0.25);
+    }
+
+    .btn-line {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ouro-claro);
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--linha);
+      transition: border-color .3s var(--ease);
+    }
+
+    .btn-line:hover {
+      border-color: var(--ouro);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeIn2 1s var(--ease) forwards;
+      animation-delay: 2s;
+    }
+
+    .hero-scroll .line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(var(--ouro), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-scroll .line::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -50px;
+      width: 100%;
+      height: 50px;
+      background: var(--ouro-claro);
+      animation: scrollDown 2.2s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0% {
+        top: -50px;
+      }
+
+      60% {
+        top: 50px;
+      }
+
+      100% {
+        top: 50px;
+      }
+    }
+
+    /* ---------- marquee ---------- */
+    .marquee-strip {
+      border-top: 1px solid var(--linha);
+      border-bottom: 1px solid var(--linha);
+      padding: 18px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 36s linear infinite;
+    }
+
+    .marquee-track span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ouro-claro);
+      padding: 0 26px;
+      display: inline-flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .marquee-track span::after {
+      content: "✦";
+      font-size: 9px;
+      color: var(--ouro);
+      font-style: normal;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ---------- shell ---------- */
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 6vw;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-pad {
+      padding: 130px 0;
+    }
+
+    .divider {
+      width: 64px;
+      height: 1px;
+      background: var(--ouro);
+      margin: 0 auto;
+    }
+
+    .divider-draw {
+      transform-origin: left;
+      animation: drawLine 1.2s var(--ease) forwards;
+    }
+
+    @keyframes drawLine {
+      from {
+        transform: scaleX(0);
+      }
+
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    /* ---------- about ---------- */
+    .about {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .about h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.25;
+      margin: 26px 0 30px;
+    }
+
+    .about h2 em {
+      font-style: italic;
+      color: var(--ouro-claro);
+    }
+
+    .about p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: rgba(244, 238, 224, 0.75);
+      max-width: 60ch;
+      margin: 0 auto;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 70px;
+      margin-top: 64px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat b {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 44px;
+      color: var(--ouro-claro);
+      display: block;
+    }
+
+    .stat span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(244, 238, 224, 0.55);
+    }
+
+    /* ---------- services ---------- */
+    .services-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 74px;
+    }
+
+    .services-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(30px, 4vw, 46px);
+      margin: 22px 0 18px;
+    }
+
+    .services-head h2 em {
+      font-style: italic;
+      color: var(--ouro-claro);
+    }
+
+    .services-head p {
+      color: rgba(244, 238, 224, 0.7);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--linha);
+      border: 1px solid var(--linha);
+    }
+
+    .service-card {
+      background: var(--preto);
+      padding: 48px 30px;
+      text-align: center;
+      transition: background .4s var(--ease);
+      position: relative;
+    }
+
+    .service-card:hover {
+      background: var(--painel);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 26px;
+      color: var(--ouro);
+    }
+
+    .service-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .service-icon svg path,
+    .service-icon svg rect,
+    .service-icon svg circle,
+    .service-icon svg line {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      transition: stroke-dashoffset 1.1s var(--ease);
+    }
+
+    .service-card:hover .service-icon svg path,
+    .service-card:hover .service-icon svg rect,
+    .service-card:hover .service-icon svg circle,
+    .service-card:hover .service-icon svg line {
+      stroke-dashoffset: 0;
+    }
+
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(244, 238, 224, 0.6);
+    }
+
+    /* ---------- process ---------- */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 70px;
+      border-top: 1px solid var(--linha);
+    }
+
+    .p-step {
+      padding: 36px 24px 0 0;
+      border-right: 1px solid var(--linha);
+      position: relative;
+    }
+
+    .p-step:last-child {
+      border-right: none;
+    }
+
+    .p-step .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 34px;
+      margin-left: 5px;
+      color: var(--ouro);
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .p-step h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      margin-left: 5px;
+      font-size: 20px;
+      margin-bottom: 15px;
+      margin-bottom: 10px;
+    }
+
+    .p-step p {
+      font-size: 13.5px;
+      line-height: 1.7;
+      margin-left: 5px;
+      color: rgba(244, 238, 224, 0.62);
+      padding-right: 6px;
+      margin-bottom: 30px;
+    }
+
+    /* ---------- reviews ---------- */
+    .reviews {
+      text-align: center;
+    }
+
+    .g-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 24px 0 10px;
+    }
+
+    .stars {
+      color: var(--ouro-claro);
+      font-size: 19px;
+      letter-spacing: 3px;
+    }
+
+    .rating-line {
+      font-size: 13px;
+      color: rgba(244, 238, 224, 0.65);
+      letter-spacing: 0.04em;
+    }
+
+    .rating-line b {
+      color: var(--ouro-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--linha);
+      border: 1px solid var(--linha);
+      margin-top: 60px;
+      text-align: left;
+    }
+
+    .review-card {
+      background: var(--preto);
+      padding: 38px 34px;
+      transition: background .4s var(--ease);
+    }
+
+    .review-card:hover {
+      background: var(--painel);
+    }
+
+    .review-card .stars {
+      font-size: 14px;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .review-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--marfim);
+      margin-bottom: 24px;
+      min-height: 100px;
+    }
+
+    .reviewer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      border-top: 1px solid var(--linha);
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+    }
+
+    .reviewer b {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ouro-claro);
+      font-size: 11.5px;
+    }
+
+    .reviewer span {
+      color: rgba(244, 238, 224, 0.45);
+    }
+
+    .reviews-note {
+      margin-top: 30px;
+      font-size: 11px;
+      color: rgba(244, 238, 224, 0.35);
+      letter-spacing: 0.02em;
+    }
+
+    /* ---------- cta ---------- */
+    .cta {
+      text-align: center;
+      position: relative;
+    }
+
+    .cta-ring {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 34px;
+      border: 1px solid var(--ouro);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cta-ring span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 32px;
+      color: var(--ouro-claro);
+    }
+
+    .cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(32px, 5.4vw, 64px);
+      max-width: 16ch;
+      margin: 0 auto 24px;
+      line-height: 1.15;
+    }
+
+    .cta h2 em {
+      font-style: italic;
+      color: var(--ouro-claro);
+    }
+
+    .cta p {
+      color: rgba(244, 238, 224, 0.72);
+      font-size: 15.5px;
+      max-width: 44ch;
+      margin: 0 auto 44px;
+      line-height: 1.75;
+    }
+
+    .whats-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--ouro);
+      color: var(--preto);
+      font-weight: 600;
+      padding: 19px 40px;
+      font-size: 14.5px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 0 0 0 rgba(201, 163, 95, 0.45);
+      animation: pulse 2.6s infinite;
+      transition: transform .3s var(--ease);
+    }
+
+    .whats-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(201, 163, 95, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 22px rgba(201, 163, 95, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(201, 163, 95, 0);
+      }
+    }
+
+    .contact-meta {
+      display: flex;
+      justify-content: center;
+      gap: 54px;
+      margin-top: 70px;
+      flex-wrap: wrap;
+      font-size: 13px;
+    }
+
+    .contact-meta div {
+      text-align: left;
+    }
+
+    .contact-meta span {
+      display: block;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--ouro);
+      margin-bottom: 7px;
+    }
+
+    .contact-meta a:hover {
+      color: var(--ouro-claro);
+    }
+
+    /* ---------- footer ---------- */
+    footer {
+      padding: 40px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--linha);
+      font-size: 11px;
+      color: rgba(244, 238, 224, 0.4);
+      flex-wrap: wrap;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer a:hover {
+      color: var(--ouro-claro);
+    }
+
+
+    .foot-links {
+      display: flex;
+      gap: 26px;
+    }
+
+    /* ---------- floating whatsapp ---------- */
+    .float-whats {
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      z-index: 200;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--ouro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
+      animation: pulse 2.6s infinite;
+      transition: transform .3s var(--ease);
+    }
+
+    .float-whats:hover {
+      transform: scale(1.08);
+    }
+
+    .float-whats svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    @media (max-width:980px) {
+
+      nav,
+      .nav-cta {
+        display: none;
+      }
+
+      .burger {
+        display: block;
+        font-size: 11px;
+        border: 1px solid var(--linha);
+        padding: 9px 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .p-step {
+        border-bottom: 1px solid var(--linha);
+        padding-bottom: 30px;
+        margin-bottom: 6px;
+      }
+
+      .review-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-row {
+        gap: 40px;
+      }
+
+      .contact-meta {
+        gap: 32px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="siteHeader">
+    <div class="logo-mark">
+      <div class="logo-ring">
+
+        <img class="logo-img" src="logosemrisco2.png" alt="Marcenaria Vilar">
+      </div>
+      <div class="logo-text"><b>MARCENARIA</b><span>VILAR</span></div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#processo">Processo</a></li>
+        <li><a href="#avaliacoes">Avaliações</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/5511948134460" target="_blank"><span>Solicitar orçamento</span></a>
+    <div class="burger">Menu</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-monogram">
+      <svg viewBox="0 0 220 220">
+        <circle class="ring-draw" cx="110" cy="110" r="109"></circle>
+        <circle class="ring-dot" cx="110" cy="110" r="98"></circle>
+      </svg>
+      <img class="hero-logo-img" src="logosemrisco2.png" alt="Marcenaria Vilar">
+    </div>
+    <h1>Móveis planejados<span class="script">com assinatura.</span></h1>
+    <p>Há mais de 10 anos desenhando e produzindo marcenaria sob medida. Cozinhas, quartos, salas e painéis, com
+      atendimento em todas as regiões.</p>
+    <div class="hero-actions">
+      <a class="btn-gold" href="https://wa.me/5511948134460" target="_blank">Solicitar orçamento</a>
+      <a class="btn-line" href="#servicos">Ver serviços</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span><span>Móveis Planejados</span><span>Cozinhas</span><span>Painéis
+          Ripados</span><span>Quartos</span><span>Racks & Salas</span><span>Projeto 3D</span><span>Sob
+          Medida</span><span>+10 Anos de Marcenaria</span></span>
+      <span><span>Móveis Planejados</span><span>Cozinhas</span><span>Painéis
+          Ripados</span><span>Quartos</span><span>Racks & Salas</span><span>Projeto 3D</span><span>Sob
+          Medida</span><span>+10 Anos de Marcenaria</span></span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section-pad" id="sobre">
+    <div class="wrap about">
+      <div class="reveal">
+        <div class="eyebrow center">Quem faz</div>
+        <div class="divider divider-draw"></div>
+        <h2>Mais de uma década transformando <em>madeira em projeto.</em></h2>
+        <p>A Marcenaria Vilar desenha, produz e instala móveis planejados sob medida para o seu espaço do primeiro
+          esboço ao último acabamento, sem intermediários. Atendemos todas as regiões, com projeto 3D antes da produção
+          e equipe própria na instalação.</p>
+      </div>
+      <div class="stat-row reveal reveal-d2">
+        <div class="stat"><b>10+</b><span>Anos de marcenaria</span></div>
+        <div class="stat"><b>4.9</b><span>Nota no Google</span></div>
+        <div class="stat"><b>100%</b><span>Sob medida</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section-pad" id="servicos" style="padding-top:0;">
+    <div class="wrap">
+      <div class="services-head reveal">
+        <div class="eyebrow center">O que fazemos</div>
+        <div class="divider divider-draw"></div>
+        <h2>Um projeto para <em>cada ambiente da casa.</em></h2>
+        <p>Cada peça é desenhada sob medida. Nada de módulo padrão tentando caber no seu espaço.</p>
+      </div>
+      <div class="service-grid reveal reveal-d2">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.4">
+              <rect x="10" y="8" width="40" height="44" rx="1" />
+              <line x1="30" y1="8" x2="30" y2="52" />
+              <circle cx="24" cy="30" r="1.6" fill="currentColor" stroke="none" />
+              <circle cx="36" cy="30" r="1.6" fill="currentColor" stroke="none" />
+            </svg>
+          </div>
+          <h3>Cozinhas</h3>
+          <p>Gabinetes, bancadas e armários planejados para otimizar cada centímetro.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.4">
+              <path d="M8 34h44v14H8z" />
+              <path d="M10 34v-8a4 4 0 014-4h32a4 4 0 014 4v8" />
+              <line x1="8" y1="48" x2="8" y2="52" />
+              <line x1="52" y1="48" x2="52" y2="52" />
+            </svg>
+          </div>
+          <h3>Quartos</h3>
+          <p>Camas, closets e painéis sob medida, do infantil ao suíte principal.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.4">
+              <rect x="12" y="10" width="36" height="24" rx="1" />
+              <line x1="24" y1="40" x2="36" y2="40" />
+              <line x1="30" y1="34" x2="30" y2="40" />
+              <rect x="10" y="44" width="40" height="8" rx="1" />
+            </svg>
+          </div>
+          <h3>Painéis & Racks</h3>
+          <p>Painéis ripados e racks suspensos com iluminação embutida.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.4">
+              <path d="M15 50V22l15-12 15 12v28" />
+              <line x1="22" y1="50" x2="22" y2="34" />
+              <line x1="38" y1="50" x2="38" y2="34" />
+              <line x1="22" y1="34" x2="38" y2="34" />
+            </svg>
+          </div>
+          <h3>Projeto sob medida</h3>
+          <p>Visita técnica, projeto 3D e produção pensados só para o seu espaço.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section-pad" id="processo">
+    <div class="wrap">
+      <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
+        <div class="eyebrow center">Como funciona</div>
+        <div class="divider divider-draw"></div>
+        <h2
+          style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,4vw,46px);margin-top:22px;">
+          Do papel ao <em style="font-style:italic;color:var(--ouro-claro);">parafuso.</em></h2>
+      </div>
+      <div class="process-grid reveal reveal-d2">
+        <div class="p-step">
+          <span class="num">01</span>
+          <h3>Visita e medição</h3>
+          <p>Vamos até o local, medimos o espaço real e ouvimos como você vive nele.</p>
+        </div>
+        <div class="p-step">
+          <span class="num">02</span>
+          <h3>Projeto 3D</h3>
+          <p>Você aprova o móvel pronto antes de qualquer corte — cores e ferragens inclusas.</p>
+        </div>
+        <div class="p-step">
+          <span class="num">03</span>
+          <h3>Produção</h3>
+          <p>Corte, montagem e acabamento feitos na nossa marcenaria, peça por peça.</p>
+        </div>
+        <div class="p-step">
+          <span class="num">04</span>
+          <h3>Instalação</h3>
+          <p>Equipe própria entrega e instala com o cuidado de quem construiu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section-pad reviews" id="avaliacoes">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow center">Avaliações</div>
+        <div class="divider divider-draw"></div>
+        <div class="g-badge">
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="rating-line"><b>4.9</b> de 5 no Google. Clientes atendidos em todas as regiões</div>
+      </div>
+      <div class="review-grid reveal reveal-d2">
+        <div class="review-card">
+          <span class="stars">★★★★★</span>
+          <p>"Entregaram o projeto exatamente como combinamos, com um acabamento que não parece de outro mundo."</p>
+          <div class="reviewer"><b>Ariane S.</b><span>Google</span></div>
+        </div>
+        <div class="review-card">
+          <span class="stars">★★★★★</span>
+          <p>"Cozinha planejada impecável. Prazo cumprido e instalação limpa do início ao fim."</p>
+          <div class="reviewer"><b>Rodrigo C.</b><span>Google</span></div>
+        </div>
+        <div class="review-card">
+          <span class="stars">★★★★★</span>
+          <p>"Fizeram minha adega e o resultado ficou excelente. Desde o orçamento até a entrega, tudo foi feito com
+            qualidade. Recomendo o trabalho da Marcenaria Vilar."</p>
+          <div class="reviewer"><b>Lucas P.</b><span>Cliente</span></div>
+        </div>
+      </div>
+      <p class="reviews-note">Confira o que alguns dos nossos clientes dizem sobre nosso trabalho.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-pad cta" id="contato">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="cta-ring"><span>VILAR</span></div>
+        <h2>Tem um espaço parado? <em>Vamos desenhar o próximo projeto.</em></h2>
+        <p>Fale agora pelo WhatsApp e receba um orçamento sem compromisso, com projeto 3D incluso.</p>
+        <a class="whats-btn" href="https://wa.me/5511948134460" target="_blank">
+          <svg viewBox="0 0 24 24" fill="#0b0a08" width="21" height="21">
+            <path
+              d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.6.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10.2 9 9.7 7.8 9.5 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3z" />
+            <path
+              d="M12 2.1C6.5 2.1 2.1 6.5 2.1 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.4c1.5.8 3.1 1.2 4.9 1.2 5.5 0 9.9-4.4 9.9-9.9 0-5.4-4.4-9.8-9.9-9.8zm0 17.9c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.6 3.7-8.3 8.3-8.3 4.6 0 8.3 3.7 8.3 8.3.1 4.6-3.6 8.5-8.1 8.5z" />
+          </svg>
+          Chamar no WhatsApp
+        </a>
+      </div>
+      <div class="contact-meta reveal reveal-d2">
+        <div><span>WhatsApp</span><a href="https://wa.me/5511948134460" target="_blank">(11) 94813-4460</a></div>
+        <div><span>E-mail</span><a href="mailto:contato@marcenariavilar.com.br">paulovilar490@gmail.com</a></div>
+        <div><span>Instagram</span><a href="https://www.instagram.com/marcenariavilar"
+            target="_blank">@marcenariavilar</a></div>
+        <div><span>CNPJ</span>59.234.928/0001-83</div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div>© 2026 Marcenaria Vilar - Móveis Planejados.</div>
+    <div>
+      <span style="color:#e8d3a1;;">Desenvolvido por Apply Codes - </span>
+      <a href="https://www.instagram.com/applycodes" target="_blank">@applycodes</a>
+    </div>
+
+    <div class="foot-links">
+      <a href="https://wa.me/5511948134460" target="_blank">WhatsApp</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
+    </div>
+  </footer>
+
+  <a class="float-whats" href="https://wa.me/5511948134460" target="_blank" aria-label="Chamar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="#0b0a08">
+      <path
+        d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.6.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10.2 9 9.7 7.8 9.5 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3z" />
+      <path
+        d="M12 2.1C6.5 2.1 2.1 6.5 2.1 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.4c1.5.8 3.1 1.2 4.9 1.2 5.5 0 9.9-4.4 9.9-9.9 0-5.4-4.4-9.8-9.9-9.8zm0 17.9c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.6 3.7-8.3 8.3-8.3 4.6 0 8.3 3.7 8.3 8.3.1 4.6-3.6 8.5-8.1 8.5z" />
+    </svg>
+  </a>
+
+  <script>
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  </script>
+
+</body>
+
+</html>
