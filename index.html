@@ -601,6 +601,7 @@
       margin: 0 auto;
     }
 
+
     .stat-row {
       display: flex;
       justify-content: center;
@@ -1064,6 +1065,75 @@
         transition: none !important;
       }
     }
+
+    .section-pad {
+      padding: 130px 0;
+    }
+
+
+ /* ---------- warranty ---------- */
+    .warranty {
+      text-align: center;
+    }
+ 
+    .warranty-box {
+      max-width: 780px;
+      margin: 60px auto 0;
+      border: 1px solid var(--linha);
+      padding: 54px 60px;
+      position: relative;
+    }
+ 
+    .warranty-badge {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 26px;
+      border: 1px solid var(--ouro);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+ 
+    .warranty-badge svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--ouro-claro);
+      fill: none;
+      stroke-width: 1.4;
+    }
+ 
+    .warranty-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+ 
+    .warranty-box h3 em {
+      font-style: italic;
+      color: var(--ouro-claro);
+    }
+ 
+    .warranty-box p {
+      font-size: 14.5px;
+      line-height: 1.85;
+      color: rgba(244, 238, 224, 0.68);
+      max-width: 56ch;
+      margin: 0 auto 14px;
+    }
+ 
+    .warranty-box p:last-child {
+      margin-bottom: 0;
+    }
+ 
+    .warranty-box .note {
+      font-size: 12px;
+      color: rgba(244, 238, 224, 0.45);
+      letter-spacing: 0.01em;
+    }
+ 
+
   </style>
 </head>
 
@@ -1099,9 +1169,8 @@
       </svg>
       <img class="hero-logo-img" src="logosemrisco2.png" alt="Marcenaria Vilar">
     </div>
-    <h1>Móveis planejados<span class="script">com assinatura.</span></h1>
-    <p>Há mais de 10 anos desenhando e produzindo marcenaria sob medida. Cozinhas, quartos, salas e painéis, com
-      atendimento em todas as regiões.</p>
+    <h1>Marcenaria em geral<span class="script">sob medida.</span></h1>
+<p>Trabalhamos com MDF, madeiras maciças, fórmica, folhas de madeira, decks e outras soluções em marcenaria sob medida.</p>
     <div class="hero-actions">
       <a class="btn-gold" href="https://wa.me/5511948134460" target="_blank">Solicitar orçamento</a>
       <a class="btn-line" href="#servicos">Ver serviços</a>
@@ -1114,13 +1183,42 @@
   <div class="marquee-strip">
     <div class="marquee-track">
       <span><span>Móveis Planejados</span><span>Cozinhas</span><span>Painéis
-          Ripados</span><span>Quartos</span><span>Racks & Salas</span><span>Projeto 3D</span><span>Sob
-          Medida</span><span>+10 Anos de Marcenaria</span></span>
+          </span><span>Quartos</span><span>Homes & Salas</span><span>Projeto 3D</span><span>Sob
+          Medida</span><span>Garantia de 5 Anos</span><span>Decks</span>
+          <span>Madeiras Maciças</span><span>Fórmica</span><span>Folhas de Madeira</span><span>e Outras Soluções em Marcenaria</span>
       <span><span>Móveis Planejados</span><span>Cozinhas</span><span>Painéis
-          Ripados</span><span>Quartos</span><span>Racks & Salas</span><span>Projeto 3D</span><span>Sob
-          Medida</span><span>+10 Anos de Marcenaria</span></span>
+          Ripados</span><span>Quartos</span><span>Homes</span><span>Projeto 3D</span><span>Sob
+          Medida</span><span>Garantia de 5 Anos</span>
     </div>
   </div>
+
+  <!-- WARRANTY -->
+  <section class="section-pad warranty" id="garantia">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow center">Garantia</div>
+        <div class="divider divider-draw"></div>
+        <h2 class="serif"
+          style="font-weight:400;font-size:clamp(30px,4vw,46px);margin-top:22px;">
+          5 anos de <em style="font-style:italic;color:var(--ouro-claro);">garantia.</em></h2>
+      </div>
+      <div class="warranty-box reveal reveal-d2">
+        <div class="warranty-badge">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <h3>Todos os nossos móveis planejados têm <em>5 anos de garantia.</em></h3>
+        <p>Cobrimos defeitos de fabricação em estrutura, ferragens e acabamento, desde que o móvel seja usado
+          conforme a sua finalidade.</p>
+        <p>A garantia não cobre mau uso, umidade excessiva, impactos, alterações feitas por terceiros ou desgaste
+          natural do dia a dia.</p>
+        <div class="note">Consulte as condições completas no momento do fechamento do seu projeto.</div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ABOUT -->
   <section class="section-pad" id="sobre">
@@ -1133,10 +1231,10 @@
           esboço ao último acabamento, sem intermediários. Atendemos todas as regiões, com projeto 3D antes da produção
           e equipe própria na instalação.</p>
       </div>
-      <div class="stat-row reveal reveal-d2">
+       <div class="stat-row reveal reveal-d2">
         <div class="stat"><b>10+</b><span>Anos de marcenaria</span></div>
         <div class="stat"><b>4.9</b><span>Nota no Google</span></div>
-        <div class="stat"><b>100%</b><span>Sob medida</span></div>
+        <div class="stat"><b>5 Anos</b><span>De garantia</span></div>
       </div>
     </div>
   </section>
@@ -1184,8 +1282,8 @@
               <rect x="10" y="44" width="40" height="8" rx="1" />
             </svg>
           </div>
-          <h3>Painéis & Racks</h3>
-          <p>Painéis ripados e racks suspensos com iluminação embutida.</p>
+          <h3>Painéis & Homes</h3>
+          <p>Painéis ripados e Homes suspensos com iluminação embutida.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">
@@ -1222,7 +1320,7 @@
         <div class="p-step">
           <span class="num">02</span>
           <h3>Projeto 3D</h3>
-          <p>Você aprova o móvel pronto antes de qualquer corte — cores e ferragens inclusas.</p>
+          <p>Você aprova o móvel pronto antes de qualquer corte, cores e ferragens inclusas.</p>
         </div>
         <div class="p-step">
           <span class="num">03</span>
@@ -1264,7 +1362,7 @@
           <span class="stars">★★★★★</span>
           <p>"Fizeram minha adega e o resultado ficou excelente. Desde o orçamento até a entrega, tudo foi feito com
             qualidade. Recomendo o trabalho da Marcenaria Vilar."</p>
-          <div class="reviewer"><b>Lucas P.</b><span>Cliente</span></div>
+          <div class="reviewer"><b>Lucas P.</b><span>Google</span></div>
         </div>
       </div>
       <p class="reviews-note">Confira o que alguns dos nossos clientes dizem sobre nosso trabalho.</p>
@@ -1294,6 +1392,7 @@
         <div><span>Instagram</span><a href="https://www.instagram.com/marcenariavilar"
             target="_blank">@marcenariavilar</a></div>
         <div><span>CNPJ</span>59.234.928/0001-83</div>
+        <div><span>Funcionamento</span>Seg a Sáb: 8h às 18h<br>Dom e feriados: fechado</div>
       </div>
     </div>
   </section>
