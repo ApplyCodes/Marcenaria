@@ -29,6 +29,8 @@
 
     html {
       scroll-behavior: smooth;
+      width: 100%;
+      min-height: 100%;
     }
 
     body {
@@ -37,6 +39,9 @@
       font-family: 'Jost', sans-serif;
       overflow-x: hidden;
       position: relative;
+      width: 100%;
+      min-height: 100%;
+      -webkit-text-size-adjust: 100%;
     }
 
     ::selection {
@@ -268,7 +273,9 @@
 
     /* ---------- hero ---------- */
     .hero {
+      min-height: 100vh;
       min-height: 100svh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -276,16 +283,14 @@
       text-align: center;
       padding: 140px 6vw 80px;
       position: relative;
+      width: 100%;
     }
 
     .hero-monogram {
       position: relative;
-      width: 220px;
-      height: 220px;
+      width: min(220px, 45vw);
+      height: min(220px, 45vw);
       margin-bottom: 44px;
-      opacity: 0;
-      animation: fadeScale 1.2s var(--ease) forwards;
-      animation-delay: .15s;
     }
 
     @keyframes fadeScale {
@@ -351,8 +356,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 200px;
-      height: 200px;
+      width: 91%;
+      height: 91%;
       border-radius: 50%;
       object-fit: cover;
       opacity: 1;
