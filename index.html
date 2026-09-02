@@ -950,7 +950,7 @@
       font-size: 13px;
     }
 
-   .contact-meta div {
+    .contact-meta div {
       text-align: left;
     }
 
@@ -1065,7 +1065,7 @@
       }
 
       .contact-meta div {
-        text-align:left;
+        text-align: left;
       }
 
       .contact-meta div:last-child {
@@ -1160,6 +1160,136 @@
       font-size: 12px;
       color: rgba(244, 238, 224, 0.45);
       letter-spacing: 0.01em;
+    }
+
+    /* ---------- botão ver fotos ---------- */
+    .ver-fotos {
+      margin-top: 20px;
+      background: none;
+      border: none;
+      color: var(--ouro-claro);
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--linha);
+      padding-bottom: 4px;
+      cursor: pointer;
+      transition: border-color .3s var(--ease), color .3s var(--ease);
+    }
+
+    .ver-fotos:hover {
+      color: var(--ouro);
+      border-color: var(--ouro);
+    }
+
+    /* ---------- modal carrossel ---------- */
+    .galeria-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 10, 8, 0.96);
+      backdrop-filter: blur(6px);
+      z-index: 300;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6vw;
+      opacity: 0;
+      transition: opacity .35s var(--ease);
+    }
+
+    .galeria-overlay.ativo {
+      display: flex;
+      opacity: 1;
+    }
+
+    .galeria-titulo {
+      color: var(--ouro-claro);
+      font-weight: 500;
+      font-size: 26px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .carrossel-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .carrossel-wrap img {
+      max-width: 100%;
+      max-height: 68vh;
+      object-fit: contain;
+      border: 1px solid var(--linha);
+    }
+
+    .carrossel-contador {
+      margin-top: 18px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: rgba(244, 238, 224, 0.55);
+      text-transform: uppercase;
+    }
+
+    .galeria-close {
+      position: absolute;
+      top: 26px;
+      right: 30px;
+      background: none;
+      border: 1px solid var(--ouro);
+      color: var(--ouro-claro);
+      width: 42px;
+      height: 42px;
+      font-size: 22px;
+      cursor: pointer;
+      transition: border-color .3s var(--ease), color .3s var(--ease);
+    }
+
+    .galeria-close:hover {
+      border-color: var(--ouro-claro);
+    }
+
+    .lightbox-nav {
+      background: none;
+      border: 1px solid var(--linha);
+      color: var(--ouro-claro);
+      width: 46px;
+      height: 46px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: border-color .3s var(--ease);
+      flex-shrink: 0;
+      margin: 0 18px;
+    }
+
+    .lightbox-nav:hover {
+      border-color: var(--ouro);
+    }
+
+    @media (max-width:700px) {
+      .carrossel-wrap img {
+        max-height: 52vh;
+      }
+
+      .lightbox-nav {
+        width: 38px;
+        height: 38px;
+        margin: 0 8px;
+      }
+
+      .galeria-titulo {
+        font-size: 20px;
+      }
+
+
+      .galeria-box {
+        padding: 26px;
+      }
     }
   </style>
 </head>
@@ -1287,6 +1417,7 @@
           </div>
           <h3>Cozinhas</h3>
           <p>Gabinetes, bancadas e armários planejados para otimizar cada centímetro.</p>
+          <button class="ver-fotos" onclick="abrirGaleria('cozinhas')">Clique aqui para ver algumas fotos ✦</button>
         </div>
         <div class="service-card">
           <div class="service-icon">
@@ -1299,6 +1430,7 @@
           </div>
           <h3>Quartos</h3>
           <p>Camas, closets e painéis sob medida, do infantil ao suíte principal.</p>
+          <button class="ver-fotos" onclick="abrirGaleria('quartos')">Clique aqui para ver algumas fotos ✦</button>
         </div>
         <div class="service-card">
           <div class="service-icon">
@@ -1311,6 +1443,7 @@
           </div>
           <h3>Painéis & Homes</h3>
           <p>Painéis ripados e Homes suspensos com iluminação embutida.</p>
+          <button class="ver-fotos" onclick="abrirGaleria('homes')">Clique aqui para ver algumas fotos ✦</button>
         </div>
         <div class="service-card">
           <div class="service-icon">
@@ -1327,6 +1460,27 @@
       </div>
     </div>
   </section>
+
+  <!-- MODAL CARROSSEL -->
+  <div class="galeria-overlay" id="galeriaOverlay">
+    <button class="galeria-close" onclick="fecharGaleria()" aria-label="Fechar">&times;</button>
+    <h3 id="galeriaTitulo" class="serif galeria-titulo"></h3>
+
+    <div class="carrossel-wrap">
+      <button class="lightbox-nav prev" onclick="carrosselNav(-1)" aria-label="Anterior">&#10094;</button>
+      <img id="carrosselImg" src="" alt="">
+      <button class="lightbox-nav next" onclick="carrosselNav(1)" aria-label="Próxima">&#10095;</button>
+    </div>
+
+    <div class="carrossel-contador" id="carrosselContador"></div>
+  </div>
+  <!-- VISUALIZADOR FULLSCREEN -->
+  <div class="lightbox-overlay" id="lightboxOverlay">
+    <button class="lightbox-nav prev" onclick="lightboxNav(-1)" aria-label="Anterior">&#10094;</button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-nav next" onclick="lightboxNav(1)" aria-label="Próxima">&#10095;</button>
+    <button class="lightbox-close" onclick="fecharLightbox()" aria-label="Fechar">&times;</button>
+  </div>
 
   <!-- PROCESS -->
   <section class="section-pad" id="processo">
@@ -1455,6 +1609,57 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.15 });
     revealEls.forEach(el => io.observe(el));
+
+    const fotos = {
+      cozinhas: ['cozinha.jpeg', 'cozinha2.jpeg', 'cozinha3.jpeg'],
+      quartos: ['quartoecloset.jpeg', 'quartoecloset2.jpeg', 'quartoecloset3.jpeg'],
+      homes: ['home.jpeg', 'home2.jpeg', 'home3.jpeg']
+    };
+    const titulos = {
+      cozinhas: 'Cozinhas planejadas',
+      quartos: 'Quartos & Closets',
+      homes: 'Painéis & Homes'
+    };
+
+    let categoriaAtual = [];
+    let indiceAtual = 0;
+
+    function abrirGaleria(categoria) {
+      categoriaAtual = fotos[categoria];
+      indiceAtual = 0;
+      document.getElementById('galeriaTitulo').textContent = titulos[categoria];
+      atualizarCarrossel();
+      document.getElementById('galeriaOverlay').classList.add('ativo');
+    }
+
+    function fecharGaleria() {
+      document.getElementById('galeriaOverlay').classList.remove('ativo');
+    }
+
+    function carrosselNav(direcao) {
+      indiceAtual = (indiceAtual + direcao + categoriaAtual.length) % categoriaAtual.length;
+      atualizarCarrossel();
+    }
+
+    function atualizarCarrossel() {
+      document.getElementById('carrosselImg').src = categoriaAtual[indiceAtual];
+      document.getElementById('carrosselContador').textContent =
+        (indiceAtual + 1) + ' / ' + categoriaAtual.length;
+    }
+
+    document.getElementById('galeriaOverlay').addEventListener('click', (e) => {
+      if (e.target.id === 'galeriaOverlay') fecharGaleria();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('galeriaOverlay').classList.contains('ativo')) {
+        if (e.key === 'ArrowRight') carrosselNav(1);
+        if (e.key === 'ArrowLeft') carrosselNav(-1);
+        if (e.key === 'Escape') fecharGaleria();
+      }
+    });
+
+
   </script>
 
 </body>
